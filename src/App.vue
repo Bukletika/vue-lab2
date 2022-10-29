@@ -8,26 +8,8 @@
     <app-card :content="resume"></app-card>
   </div>
   <div class="container">
-    
-    <p>
-      <button class="btn primary" @click="loadComments">Загрузить комментарии</button>
-    </p>
-
-    <div v-if="loading" class="loader" ></div>
-
-    <div class="card" v-if="comments.length > 0">
-      <h2>Комментарии</h2>
-
-      <ul class="list">
-        <li class="list-item" v-for="comment in comments" :key="`my-${comment.id}`">
-          <div>
-            <p><strong>{{ comment.email }}</strong></p>
-            <small v-html="comment.body"></small>
-          </div>
-        </li>
-      </ul>
-    </div>
-
+    <app-loader v-if="loading"></app-loader>
+    <app-comments v-else :comments="comments" @load-comments="loadComments" />
   </div>
 </template>
 
@@ -35,11 +17,13 @@
 import axios from "axios";
 
 // Импорт компонентов
-import AppForm from "./AppForm";
-import AppCard from "./AppCard";
+import AppForm from "./components/AppForm";
+import AppCard from "./components/AppCard";
+import AppComments from "./components/AppComments.vue";
+import AppLoader from "./components/AppLoader";
 
 export default {
-  data () {
+  data() {
     return {
       blockOptions: [
         {
@@ -62,16 +46,16 @@ export default {
       resume: [],
       loading: false,
       comments: [],
-    }
+    };
   },
   methods: {
-    setResumeBlock (option, textArea) {
+    setResumeBlock(option, textArea) {
       this.resume.push({
         blockType: option,
-        content: textArea
-      })
+        content: textArea,
+      });
     },
-   
+
     async loadComments() {
       try {
         this.loading = true;
@@ -81,9 +65,8 @@ export default {
         );
 
         if (!data) {
-          throw new Error('Список комментариев пуст')
+          throw new Error("Список комментариев пуст");
         }
-
 
         this.comments = Object.keys(data).map((key) => {
           return {
@@ -95,10 +78,10 @@ export default {
         this.loading = false;
       } catch (e) {
         this.alert = {
-          type: 'danger',
-          title: 'Ошибка!',
-          text: e.message
-        }
+          type: "danger",
+          title: "Ошибка!",
+          text: e.message,
+        };
         console.log(e.message);
         this.loading = false;
       }
@@ -106,25 +89,17 @@ export default {
   },
   components: {
     AppForm,
-    AppCard
+    AppCard,
+    AppComments,
+    AppLoader,
   },
   computed: {
-    choiceDefaultOption () {
-      return this.blockOptions[0].optionType
-    }
-  }
-}
+    choiceDefaultOption() {
+      return this.blockOptions[0].optionType;
+    },
+  },
+};
 </script>
 
 <style>
-.avatar {
-  display: flex;
-  justify-content: center;
-}
-
-.avatar img {
-  width: 150px;
-  height: auto;
-  border-radius: 50%;
-}
 </style>

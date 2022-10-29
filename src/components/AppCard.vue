@@ -2,13 +2,13 @@
 <template>
   <div class="card card-w70">
 
-    <div v-if="content.length > 0">
-      <div v-for="(block, id) in content" :key="`block-${id}`">
-        <app-card-title v-if="block.blockType === 'title'" :title="block.content"></app-card-title>
-        <app-card-avatar v-else-if="block.blockType === 'avatar'" :image="block.content"></app-card-avatar>
-        <app-card-subtitle v-else-if="block.blockType === 'subtitle'" :subtitle="block.content"></app-card-subtitle>
-        <app-card-text v-else :text="block.content"></app-card-text>
-      </div>
+    <div v-if="content.length">
+        <component
+          v-for="(block, id) in content"
+          :key="`block-${id}`"
+          :is="`app-card-${block.blockType}`"
+          v-bind="{value: block.content}"
+        ></component>
     </div>
 
     <h3 v-else>Добавьте первый блок, чтобы увидеть результат</h3>
