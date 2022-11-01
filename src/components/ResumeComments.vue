@@ -3,11 +3,11 @@
     <h2>Комментарии</h2>
 
     <ul class="list">
-      <app-comment
+      <resume-comment
         :comment="comment"
         v-for="comment in comments"
         :key="`my-${comment.id}`"
-      ></app-comment>
+      ></resume-comment>
     </ul>
   </div>
 
@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import AppComment from "./AppComment.vue";
+import ResumeComment from "./ResumeComment.vue";
 export default {
   emits: ['load-comments'],
-  components: { AppComment },
+  components: { ResumeComment },
   props: {
     comments: {
       type: Array,

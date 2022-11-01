@@ -6,7 +6,7 @@
         <component
           v-for="(block, id) in content"
           :key="`block-${id}`"
-          :is="`app-card-${block.blockType}`"
+          :is="`resume-card-${block.blockType}`"
           v-bind="{value: block.content}"
         ></component>
     </div>
@@ -18,10 +18,10 @@
 
 <script>
 // Импорт компонентов
-import AppCardTitle from "./AppCardTitle";
-import AppCardAvatar from "./AppCardAvatar";
-import AppCardSubtitle from "./AppCardSubtitle";
-import AppCardText from "./AppCardText";
+import ResumeCardTitle from "./ResumeCardTitle";
+import ResumeCardAvatar from "./ResumeCardAvatar";
+import ResumeCardSubtitle from "./ResumeCardSubtitle";
+import ResumeCardText from "./ResumeCardText";
 
 export default {
   props: {
@@ -31,10 +31,10 @@ export default {
   },
 
   components: {
-    AppCardTitle,
-    AppCardAvatar,
-    AppCardSubtitle,
-    AppCardText
+    ResumeCardTitle,
+    ResumeCardAvatar,
+    ResumeCardSubtitle,
+    ResumeCardText
   },
 }
 </script>

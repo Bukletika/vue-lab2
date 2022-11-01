@@ -1,15 +1,15 @@
 <template>
   <div class="container column">
-    <app-form
+    <resume-form
       :options="blockOptions"
       :choiceOption="choiceDefaultOption"
       @submitForm="setResumeBlock"
-    ></app-form>
-    <app-card :content="resume"></app-card>
+    ></resume-form>
+    <resume-card :content="resume"></resume-card>
   </div>
   <div class="container">
     <app-loader v-if="loading"></app-loader>
-    <app-comments v-else :comments="comments" @load-comments="loadComments" />
+    <resume-comments v-else :comments="comments" @load-comments="loadComments"></resume-comments>
   </div>
 </template>
 
@@ -17,9 +17,9 @@
 import axios from "axios";
 
 // Импорт компонентов
-import AppForm from "./components/AppForm";
-import AppCard from "./components/AppCard";
-import AppComments from "./components/AppComments.vue";
+import ResumeForm from "./components/ResumeForm";
+import ResumeCard from "./components/ResumeCard";
+import ResumeComments from "./components/ResumeComments.vue";
 import AppLoader from "./components/AppLoader";
 
 export default {
@@ -88,9 +88,9 @@ export default {
     },
   },
   components: {
-    AppForm,
-    AppCard,
-    AppComments,
+    ResumeForm,
+    ResumeCard,
+    ResumeComments,
     AppLoader,
   },
   computed: {
